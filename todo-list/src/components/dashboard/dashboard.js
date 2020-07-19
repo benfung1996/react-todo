@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from "../Header/Header";
 import List from '../List/List';
 
 export default class Dashboard extends Component {
@@ -51,15 +52,21 @@ export default class Dashboard extends Component {
         })
     }
 
+    //Delete Item
+    delItem = (id) => {
+        this.setState({ items: [...this.state.items.filter(item => item.id !== id)] })
+    }
+
 
     render() {
         return (
             <div>
+                <Header />
                 <form onSubmit={this.onSubmit}>
                     <input value={this.state.userInput} onChange={this.onChange} />
                     <button>Submit</button>
                 </form>
-                <List items={this.state.items} markComplete={this.markComplete} />
+                <List items={this.state.items} markComplete={this.markComplete} delItem={this.delItem}/>
             </div>
         )
     }
