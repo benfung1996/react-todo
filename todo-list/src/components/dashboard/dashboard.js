@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Header from "../Header/Header";
 import List from '../List/List';
-
+import AddTodo from '../AddTodo/AddTodo';
 export default class Dashboard extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            userInput: "",
             items: [
                 {
                     id: 1,
@@ -28,23 +27,11 @@ export default class Dashboard extends Component {
         };
     }
 
-    onChange = (event) => {
-        this.setState({ userInput: event.target.vaule });
-    }
-
-    onSubmit = (event) => {
-        event.preventDefault();
-        this.setState({
-            userInput: "",
-            items: [...this.state.items, this.state.userInput]
-        });
-    }
-
     //Toggle Complete
     markComplete = (id) => {
         this.setState({
             items: this.state.items.map(item => {
-                if(item.id === id) {
+                if (item.id === id) {
                     item.completed = !item.completed
                 }
                 return item;
@@ -57,16 +44,23 @@ export default class Dashboard extends Component {
         this.setState({ items: [...this.state.items.filter(item => item.id !== id)] })
     }
 
+    //Add Todo
+    addTodo = (title) => {
+        const newTodo = {
+            id: 4,
+            title,
+            completed: false
+        }
+        this.setState({ items: [...this.state.items, newTodo] })
+    }
+
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <Header />
-                <form onSubmit={this.onSubmit}>
-                    <input value={this.state.userInput} onChange={this.onChange} />
-                    <button>Submit</button>
-                </form>
-                <List items={this.state.items} markComplete={this.markComplete} delItem={this.delItem}/>
+                <AddTodo addTodo={this.addTodo} />
+                <List items={this.state.items} markComplete={this.markComplete} delItem={this.delItem} />
             </div>
         )
     }
