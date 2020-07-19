@@ -39,6 +39,18 @@ export default class Dashboard extends Component {
         });
     }
 
+    //Toggle Complete
+    markComplete = (id) => {
+        this.setState({
+            items: this.state.items.map(item => {
+                if(item.id === id) {
+                    item.completed = !item.completed
+                }
+                return item;
+            })
+        })
+    }
+
 
     render() {
         return (
@@ -47,7 +59,7 @@ export default class Dashboard extends Component {
                     <input value={this.state.userInput} onChange={this.onChange} />
                     <button>Submit</button>
                 </form>
-                <List items={this.state.items} />
+                <List items={this.state.items} markComplete={this.markComplete} />
             </div>
         )
     }

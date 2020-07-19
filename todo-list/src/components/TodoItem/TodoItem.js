@@ -3,22 +3,24 @@ import PropTypes from 'prop-types';
 
 export class TodoItem extends Component {
 
-    getStyle= () => {
-        if(this.props.item.completed) {
-            return {
-                textDecoration: 'line-through'
-            }
-        } else {
-            return {
-                textDecoration: 'none'
-            }
+    getStyle = () => {
+        return {
+            background: '#f4f4f4',
+            padding: '10px',
+            borderBottom: '1px #ccc dotted',
+            textDecoration: this.props.item.completed ?
+                'line-through' : 'none'
         }
     }
 
     render() {
+        const { id, title } = this.props.item;
         return (
             <div style={this.getStyle()}>
-                <li>{this.props.item.title}</li>
+                <ul>
+                    <input type="checkbox" onChange={this.props.markComplete.bind(this, id)} /> {' '}
+                    {title}
+                </ul>
             </div>
         )
     }
@@ -27,10 +29,6 @@ export class TodoItem extends Component {
 //PropTypes
 TodoItem.propTypes = {
     item: PropTypes.object.isRequired
-}
-
-const itemStyles = {
-    backgroundColor: '#f4f4f4'
 }
 
 export default TodoItem

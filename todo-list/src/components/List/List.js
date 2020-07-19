@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export default class List extends Component {
     render() {
         return this.props.items.map((item) => (
-            <TodoItem key={item.id} item={item} />
+            <TodoItem key={item.id} item={item} markComplete={this.props.markComplete} />
         ));
     }
 }
