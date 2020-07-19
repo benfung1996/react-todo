@@ -1,17 +1,34 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import List from '../List/List';
 
-export default class dashboard extends Component {
+export default class Dashboard extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             userInput: "",
-            items: []
+            items: [
+                {
+                    id: 1,
+                    title: "Test1",
+                    completed: false
+                },
+                {
+                    id: 2,
+                    title: "Test2",
+                    completed: true
+                },
+                {
+                    id: 3,
+                    title: "Test3",
+                    completed: false
+                },
+            ]
         };
     }
 
     onChange = (event) => {
-        this.setState({userInput: event.target.vaule});
+        this.setState({ userInput: event.target.vaule });
     }
 
     onSubmit = (event) => {
@@ -22,7 +39,7 @@ export default class dashboard extends Component {
         });
     }
 
-    
+
     render() {
         return (
             <div>
@@ -30,8 +47,7 @@ export default class dashboard extends Component {
                     <input value={this.state.userInput} onChange={this.onChange} />
                     <button>Submit</button>
                 </form>
-
-            <input value={this.state.userInput} onChange={this.onChange} />
+                <List items={this.state.items} />
             </div>
         )
     }
