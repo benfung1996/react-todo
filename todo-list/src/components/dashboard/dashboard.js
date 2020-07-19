@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from "../Header/Header";
 import List from '../List/List';
 import AddTodo from '../AddTodo/AddTodo';
+import { v4 as uuidv4 } from 'uuid';
+
 export default class Dashboard extends Component {
 
     constructor(props) {
@@ -9,17 +11,17 @@ export default class Dashboard extends Component {
         this.state = {
             items: [
                 {
-                    id: 1,
+                    id: uuidv4(),
                     title: "Test1",
                     completed: false
                 },
                 {
-                    id: 2,
+                    id: uuidv4(),
                     title: "Test2",
                     completed: true
                 },
                 {
-                    id: 3,
+                    id: uuidv4(),
                     title: "Test3",
                     completed: false
                 },
@@ -41,13 +43,14 @@ export default class Dashboard extends Component {
 
     //Delete Item
     delItem = (id) => {
+        console.log(id)
         this.setState({ items: [...this.state.items.filter(item => item.id !== id)] })
     }
 
     //Add Todo
     addTodo = (title) => {
         const newTodo = {
-            id: 4,
+            id: uuidv4(),
             title,
             completed: false
         }
