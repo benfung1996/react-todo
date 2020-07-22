@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import Dashboard from './components/Dashboard/Dashboard';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 
-function App() {
-  return (
-    <Router>
-      <Route exact path="/" component={Dashboard} />
-    </Router>
-  );
+import Dashboard from './components/Dashboard/Dashboard';
+
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Router>
+          <Route exact path="/" component={Dashboard} />
+        </Router>
+      </Provider>
+    );
+  }
 }
 
 export default App;
